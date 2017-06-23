@@ -26,7 +26,7 @@ public class MissileController : MonoBehaviour {
 		if (armed)
 		{
 			Debug.Log("Distance to target: " + Vector2.Distance(transform.position, destination));
-			if (Vector2.Distance(transform.position, destination) < 10)
+			if (Vector2.Distance(transform.position, destination) < 5)
 			{
                 explode();
 			}

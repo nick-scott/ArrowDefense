@@ -27,7 +27,7 @@ public class TouchController: MonoBehaviour {
                 touchEvent(touch.position);
 			}
 		}
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             touchEvent(Input.mousePosition);
         }
