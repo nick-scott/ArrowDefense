@@ -75,9 +75,4 @@ public class MissileController : MonoBehaviour {
     {
         return exploded;
     }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Mouse event");
-    }
 }
