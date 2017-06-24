@@ -8,7 +8,7 @@ public class EnvorinmentBuilder : MonoBehaviour {
     float groundHeightInPercent = 10f;
     void Start () {
         transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 100);
-        ground = transform.FindChild("Ground").gameObject;
+        ground = transform.Find("Ground").gameObject;
         drawGround();
         Debug.Log("groundHeightInPercent: " + groundHeightInPercent);
     }
