@@ -11,8 +11,6 @@ public class MissileController : MonoBehaviour {
 	ParticleSystem smoke;
 	ParticleSystem fire;
 	ParticleSystem explosion;
-	float missileExplodedTime = 0;
-	int missileTimeoutAfterExplosion = 5;
 	AudioSource _audio;
 
 	// Use this for initialization
@@ -38,7 +36,7 @@ public class MissileController : MonoBehaviour {
 			float step = missileSpeed * Time.deltaTime;
 			transform.position = Vector2.MoveTowards(transform.position, destination, step);
 		}
-		if(exploded && Time.time - missileExplodedTime > missileTimeoutAfterExplosion)
+		if(exploded && !explosion.isPlaying)
 		{
 			Debug.Log("Cleaning up missile");
 			Destroy(transform.gameObject);
@@ -60,7 +58,6 @@ public class MissileController : MonoBehaviour {
 		explosion.Play(true);
 		armed = false;
 		exploded = true;
-		missileExplodedTime = Time.time;
 		_audio.Stop();
 		Object[] missileExplosion = Resources.LoadAll("Sounds/PlayerMissile/Explosion", typeof(AudioClip));
 		_audio.clip = (AudioClip)missileExplosion[Random.Range(0, missileExplosion.Length)];
