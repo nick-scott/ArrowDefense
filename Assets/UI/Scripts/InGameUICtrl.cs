@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InGameUICtrl : MonoBehaviour {
 	
@@ -9,6 +10,9 @@ public class InGameUICtrl : MonoBehaviour {
 	public GameObject inGameUI;
 	public GameObject pauseMenu;
 	public GameObject settingsMenu;
+	public Image pauseButtonImage;
+	public Sprite cogImage;
+	public Sprite pauseImage;
 
 	// Update is called once per frame
 	void Update () {
@@ -26,15 +30,14 @@ public class InGameUICtrl : MonoBehaviour {
 
 	public void Pause(){
 		isPaused = true;
-		inGameUI.SetActive (false);
 		pauseMenu.SetActive (true);
+		pauseButtonImage.sprite = pauseImage;
 	}
 
 	public void Resume(){
 		isPaused = false;
 		pauseMenu.SetActive (false);
-		inGameUI.SetActive (true);
-
+		pauseButtonImage.sprite = cogImage;
 	}
 
 	public void Settings(){
