@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameEngine : MonoBehaviour {
+
+	private bool isPaused;
     SiloController silo;
     // Use this for initialization
     float lastMissileTime = 0;
@@ -21,18 +23,28 @@ public class GameEngine : MonoBehaviour {
 
     public void touchEvent(Vector2 location)
     {
-        Debug.Log("Touch at: " + location);
-        if (location.x < Screen.width / 2)
-        {
-            Debug.Log("Left Silo :" + silo);
-            silo.fireMissile(true, location);
-
-        }
-        else
-        {
-            Debug.Log("Right Silo");
-            silo.fireMissile(false, location);
-        }
+		if(!isPaused){
+			Debug.Log("Touch at: " + location);
+			if (location.x < Screen.width / 2)
+			{
+				Debug.Log("Left Silo :" + silo);
+				silo.fireMissile(true, location);
+			}
+			else
+			{
+				Debug.Log("Right Silo");
+				silo.fireMissile(false, location);
+			}
+		}
     }
+
+	public void Pause(){
+		isPaused = true;
+	}
+
+	public void Resume(){
+		isPaused = false;
+	}
+
 
 }
