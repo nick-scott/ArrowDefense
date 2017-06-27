@@ -41,10 +41,7 @@ public class GameEngine : MonoBehaviour {
 	public void Pause(){
 		isPaused = true;
 	}
-
 	public void Resume(){
 		isPaused = false;
 	}
-
-
 }
