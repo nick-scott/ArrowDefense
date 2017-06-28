@@ -11,7 +11,8 @@ public class MissileController : MonoBehaviour {
 	ParticleSystem smoke;
 	ParticleSystem fire;
 	ParticleSystem explosion;
-	AudioSource _audio;
+	public AudioClip[] missileExplosions;
+	public AudioClip[] missileLaunches;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,7 @@ public class MissileController : MonoBehaviour {
 		smoke.Play(true);
 		fire.Play(true);
 		explosion.Stop(true);
-		_audio = transform.GetComponent<AudioSource>();        
+		//_audio = transform.GetComponent<AudioSource>();        
 	}
 
 	// Update is called once per frame
@@ -58,11 +59,12 @@ public class MissileController : MonoBehaviour {
 		explosion.Play(true);
 		armed = false;
 		exploded = true;
-		_audio.Stop();
-		Object[] missileExplosion = Resources.LoadAll("Sounds/PlayerMissile/Explosion", typeof(AudioClip));
-		_audio.clip = (AudioClip)missileExplosion[Random.Range(0, missileExplosion.Length)];
-        _audio.PlayDelayed(0.5f);
+		AudioManager.instance.PlayRandomSound (GetComponent<AudioSource>(), missileExplosions, 0.5f);
 		Debug.Log("Missile Armed: " + armed);
+		//_audio.Stop();
+		//Object[] missileExplosion = Resources.LoadAll("Sounds/PlayerMissile/Explosion", typeof(AudioClip));
+		//_audio.clip = (AudioClip)missileExplosion[Random.Range(0, missileExplosion.Length)];
+        //_audio.PlayDelayed(0.5f);
 	}
 
 	private void arm()
@@ -80,10 +82,11 @@ public class MissileController : MonoBehaviour {
 			explosion.Stop(true);
 		}
 		armed = true;
+		AudioManager.instance.PlayRandomSound (GetComponent<AudioSource>(), missileLaunches, 0f);
 		Debug.Log("Missile Armed: " + armed);
-		AudioSource audio = transform.GetComponent<AudioSource>();
-		Object[] missileLaunch = Resources.LoadAll("Sounds/PlayerMissile/Launch", typeof(AudioClip));
-		audio.PlayOneShot((AudioClip)missileLaunch[Random.Range(0, missileLaunch.Length)], 0.5f);
+		//AudioSource audio = transform.GetComponent<AudioSource>();
+		//Object[] missileLaunch = Resources.LoadAll("Sounds/PlayerMissile/Launch", typeof(AudioClip));
+		//audio.PlayOneShot((AudioClip)missileLaunch[Random.Range(0, missileLaunch.Length)], 0.5f);
 	}
 
 	public bool hasExploded()
