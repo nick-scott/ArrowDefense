@@ -13,6 +13,13 @@ public class InGameUICtrl : MonoBehaviour {
 	public Image pauseButtonImage;
 	public Sprite cogImage;
 	public Sprite pauseImage;
+	public Slider[] volumeSliders;
+
+	public void Start(){
+		volumeSliders [0].value = AudioManager.instance.masterVolumePercent;
+		volumeSliders [1].value = AudioManager.instance.sfxVolumePercent;
+		volumeSliders [2].value = AudioManager.instance.musicVolumePercent;
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -52,5 +59,17 @@ public class InGameUICtrl : MonoBehaviour {
 
 	public void Quit(string sceneName){
 		SceneManager.LoadScene(sceneName);
+	}
+
+	public void SetMasterVolume(){
+		AudioManager.instance.SetVolume (volumeSliders[0].value, AudioManager.AudioChannel.Master);
+	}
+
+	public void SetSfxVolume(){
+		AudioManager.instance.SetVolume (volumeSliders[1].value, AudioManager.AudioChannel.Sfx);
+	}
+
+	public void SetMusicVolume(){
+		AudioManager.instance.SetVolume (volumeSliders[2].value, AudioManager.AudioChannel.Music);
 	}
 }
