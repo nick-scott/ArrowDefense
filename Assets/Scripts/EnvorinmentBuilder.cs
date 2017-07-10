@@ -1,33 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class EnvorinmentBuilder : MonoBehaviour{
-	GameObject hill;
-	GameObject groundFill;
-	GameObject tree;
-	// Use this for initialization
-	static float groundHeightInPercent = 10f;
-	float realPercentage = 100 / groundHeightInPercent;
+public class EnvorinmentBuilder : MonoBehaviour
+{
 
-	void Start () {
-		transform.position = new Vector3(UnitUtility.centerWidth(), UnitUtility.centerHeight(), 100);
-		hill = transform.Find("Hill").gameObject;
-		groundFill = transform.Find("GroundFill").gameObject;
-		drawGround();
-		Debug.Log("groundHeightInPercent: " + groundHeightInPercent);
-	}
+    public GameObject hillPrefab;
+    public float numHills = 1;
+    public float hillDepth = 10f;
+    public float groundHeightInPercent = 10f;
 
-	private void drawGround()
-	{
-		hill.transform.position = new Vector3(UnitUtility.centerWidth(), UnitUtility.percentHeight(groundHeightInPercent)/2, transform.position.z);
-		groundFill.transform.position = new Vector3(UnitUtility.centerWidth(), UnitUtility.percentHeight(groundHeightInPercent) / 4, transform.position.z);
-		hill.transform.localScale = new Vector3(Screen.width*1.4f, UnitUtility.percentHeight(groundHeightInPercent), 1);
-		groundFill.transform.localScale = new Vector3(Screen.width, UnitUtility.percentHeight(groundHeightInPercent) / 2, 1);
-		Debug.Log("groundHeight: " + Screen.height / realPercentage);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+
+    void Start()
+    {
+        buildHills();
+    }
+
+    void buildHills()
+    {
+        float realPercentage = 100 / groundHeightInPercent;
+
+        transform.position = new Vector3(UnitUtility.centerWidth(), UnitUtility.centerHeight(), 100);
+        GameObject mainHill = Instantiate(hillPrefab, transform);
+        //groundFill = transform.Find("GroundFill").gameObject;
+        float groundHeight = UnitUtility.percentHeight(groundHeightInPercent);
+        mainHill.transform.position = new Vector3(UnitUtility.centerWidth(), groundHeight / 2, Random.Range(0, transform.position.z*2));
+        mainHill.transform.localScale = new Vector3(Screen.width*1.4f, groundHeight, groundHeight);
+
+        for(int i = 1; i < numHills; i++)
+        {
+            makeSuperficialHill();
+        }
+        Debug.Log("groundHeightInPercent: " + groundHeightInPercent);
+    }
+
+    GameObject makeSuperficialHill()
+    {
+        return null;
+    }
 }

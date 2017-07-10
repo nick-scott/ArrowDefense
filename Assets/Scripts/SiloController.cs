@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SiloController {
 
+    public GameObject Missile { private get; set; }
+
 
     public void fireMissile(bool fromLeft, Vector2 location)
     {
@@ -12,8 +14,14 @@ public class SiloController {
         {
             origin.x = -20;
         }
-        GameObject missileObject = GameObject.Instantiate(GameObject.Find("Missile"));
+        GameObject missileObject = GameObject.Instantiate(Missile);
         MissileController missile = missileObject.GetComponent<MissileController>();
         missile.launch(origin, location);
+    }
+
+    public SiloController setMissile(GameObject missilePrefab)
+    {
+        this.Missile = missilePrefab;
+        return this;
     }
 }

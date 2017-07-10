@@ -5,12 +5,13 @@ using UnityEngine;
 public class GameEngine : MonoBehaviour {
 
 	private bool isPaused;
+    public GameObject missilePrefab;
     SiloController silo;
     // Use this for initialization
     float lastMissileTime = 0;
     float nextMissileTime = 0;
     void Start () {
-        silo = new SiloController();
+        silo = new SiloController().setMissile(missilePrefab);
     }
 	
 	// Update is called once per frame
