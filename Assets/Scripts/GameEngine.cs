@@ -6,10 +6,11 @@ public class GameEngine : MonoBehaviour {
 
 	private bool isPaused;
     public GameObject missilePrefab;
+    public GameObject enemyMissilePrefab;
     SiloController silo;
     // Use this for initialization
     float lastMissileTime = 0;
-    float nextMissileTime = 0;
+    float nextMissileTime = 3;
     void Start () {
         silo = new SiloController().setMissile(missilePrefab);
     }
@@ -18,7 +19,10 @@ public class GameEngine : MonoBehaviour {
 	void Update () {
 		if(Time.time > lastMissileTime + nextMissileTime)
         {
-
+            Instantiate(enemyMissilePrefab)
+                .GetComponent<EnemyMissileController>()
+                .launch(new Vector2(0,Screen.height), new Vector2(Screen.width, 0));
+            lastMissileTime = Time.time;
         }
 	}
 

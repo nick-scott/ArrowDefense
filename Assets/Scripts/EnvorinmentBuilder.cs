@@ -24,7 +24,7 @@ public class EnvorinmentBuilder : MonoBehaviour
         GameObject mainHill = Instantiate(hillPrefab, transform);
         //groundFill = transform.Find("GroundFill").gameObject;
         float groundHeight = UnitUtility.percentHeight(groundHeightInPercent);
-        mainHill.transform.position = new Vector3(UnitUtility.centerWidth(), groundHeight / 2, Random.Range(0, transform.position.z*2));
+        mainHill.transform.position = new Vector3(UnitUtility.centerWidth(), groundHeight / 2, Random.Range(0, 200));
         mainHill.transform.localScale = new Vector3(Screen.width*1.4f, groundHeight, groundHeight);
 
         for(int i = 1; i < numHills; i++)
