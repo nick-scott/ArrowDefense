@@ -8,15 +8,19 @@ public class EnvorinmentBuilder : MonoBehaviour
     public float numHills = 1;
     float hillDepth = 500f;
     public float groundHeightInPercent = 10f;
+    public GameObject treefab;
 
     // Use this for initialization
 
     void Start()
     {
-        buildHills();
+        GameObject mainHill = buildHill();
+        TreeController tc = new TreeController(treefab);
+        tc.Environment = this.transform;
+        tc.populateTreesOnObject(mainHill, 1);
     }
 
-    void buildHills()
+    GameObject buildHill()
     {
         float realPercentage = 100 / groundHeightInPercent;
 
@@ -26,16 +30,7 @@ public class EnvorinmentBuilder : MonoBehaviour
         float groundHeight = UnitUtility.percentHeight(groundHeightInPercent);
         mainHill.transform.position = new Vector3(UnitUtility.centerWidth(), -550 + transform.position.y, hillDepth);
         mainHill.transform.localScale = new Vector3(Screen.width*2, hillDepth, hillDepth);
-
-        for(int i = 1; i < numHills; i++)
-        {
-            makeSuperficialHill();
-        }
         Debug.Log("groundHeightInPercent: " + groundHeightInPercent);
-    }
-
-    GameObject makeSuperficialHill()
-    {
-        return null;
+        return mainHill;
     }
 }
