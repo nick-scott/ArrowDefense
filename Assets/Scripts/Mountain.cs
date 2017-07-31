@@ -5,7 +5,6 @@ using UnityEngine;
 public class Mountain : MonoBehaviour {
 
     public Color textureColour = new Color(1, 1, 1, 1);
-    public AnimationCurve lightMap = AnimationCurve.Linear(0, 0, 1, 1);
 
     // Use this for initialization
     void Start () {
