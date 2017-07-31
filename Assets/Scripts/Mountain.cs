@@ -18,7 +18,7 @@ public class Mountain : MonoBehaviour {
         Vector3[] normals = mesh.normals;
         for (int n = 0; n < normals.Length; n++)
         {
-            normals[n] = new Vector3(0, Mathf.Pow(vertices[n].y,4)*10, -10);
+            normals[n] = new Vector3(0, vertices[n].y, -1);
         }
         mesh.normals = normals;
         mesh.RecalculateBounds();
